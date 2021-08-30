@@ -16,7 +16,7 @@ tarkisteet = {0: '0', 1: '1', 2: '2', 3: '3',
 nyt = datetime.datetime.now()
 
 # Modulin funktiot
-def tarkista_hetu(hetu):
+def onko_hetu_oikeanlainen(hetu):
     """Tarkistaa, että henkilötunnus on oikein muodostettu
     käyttäen modulo 31 tarkistettta
 
@@ -58,7 +58,7 @@ def tarkista_hetu(hetu):
 
     return oikein
 
-def tarkista_pituus(hetu):
+def onko_pituus_oikein(hetu):
     """Tarkistaa henkilötunnuksen pituuden po. 11 merkkiä
 
     Args:
@@ -70,10 +70,14 @@ def tarkista_pituus(hetu):
     # Lasketaan henkilötunnuksen pituus
     pituus = len(hetu)
 
+    # tapa 1
     if pituus == 11:
         pituus_ok = True
     else:
         pituus_ok = False
+
+    # tapa 2
+    pituus_ok = (pituus == 11)
 
     return pituus_ok
 
