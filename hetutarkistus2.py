@@ -20,7 +20,11 @@ def syntymapaiva(hetu):
     return paivays.replace(year=(vuosisata + (paivays.year % 100)))
 
 def ika(hetu):
-    paivays = syntymapaiva(hetu)
-    # FIXME: Laske ikä oikein
-    aikaero = datetime.date.today() - paivays
-    return int(aikaero.total_seconds() / 3600 / 24 / 365)
+    syntynyt = syntymapaiva(hetu)
+    tanaan = datetime.date.today()
+    vuosiero = tanaan.year - syntynyt.year
+    synttarit_tana_vuonna = syntynyt.replace(year=tanaan.year)
+    viettanyt_jo = (synttarit_tana_vuonna > tanaan)
+    # Käytetään (A if EHTO else B) rakennetta, joka
+    # palauttaa A:n jos EHTO tori, muuten B:n
+    return (vuosiero if viettanyt_jo else vuosiero - 1)
